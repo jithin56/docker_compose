@@ -1,0 +1,41 @@
+services:
+  python:
+    container_name: cont1
+    build: ./hotel_booking_python/
+    ports:
+      - "1234:5000"
+    networks:
+      - python_nw
+    volumes:
+      - hotel_booking_python:/app_py
+
+  javascript:
+    container_name: cont2
+    build: ./movie_booking_nodejs
+    ports:
+      - "1235:3000"
+    networks:
+      - js_nw
+    volumes:
+      - movie_booking_nodejs:/app_js
+
+  java:
+    container_name: cont3
+    build: ./movie_booking_java
+    ports:
+      - "1236:80"
+    networks:
+      - java_nw
+
+
+networks:
+  python_nw:
+    driver: bridge
+  js_nw:
+    driver: bridge
+  java_nw:
+    driver: bridge
+
+volumes:
+  hotel_booking_python:
+  movie_booking_nodejs:
